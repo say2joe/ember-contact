@@ -7,3 +7,4 @@ So that you don't spend more than four hours on this exercise, please note the f
 
 1. Validation rules may be much simpler
 2. Contacts do not need to be stored in localStorage -- we can start with a fresh contact list every page load
+3. The loading animation can be removed
