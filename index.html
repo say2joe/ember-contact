@@ -4,16 +4,17 @@
 
 <title>Contact Path</title>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700'>
-<link rel="stylesheet" href="/css/normalize.css">
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="./css/normalize.css">
+<link rel="stylesheet" href="./css/main.css">
 
 </head>
 <body>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<!-- script src="http://builds.emberjs.com/ember-latest.js"></script :: failed assertion -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://builds.emberjs.com/handlebars-1.0.0-rc.4.js"></script>
-<script src="http://builds.emberjs.com/ember-latest.js"></script>
-<script src="/app.js"></script>
+<script src="http://builds.emberjs.com/ember-1.0.0-rc.6.js"></script>
+<script src="./app.js"></script>
 
 <script type="text/x-handlebars" data-template-name="application">
   <div id="wrapper">
@@ -21,53 +22,53 @@
     <header>
       <div id="logo">
         <a href="#">
-          <img src="/img/logo.png" alt="Contact Path">
+          <img src="./img/logo.png" alt="Contact Path">
         </a>
       </div>
     </header>
+    
     <div id="smartSearch">
       <input type="search" id="searchBox" placeholder="Who?">
-      {{!-- if search results exist
+      {{#if criteria}}
         <ul id="searchResults">
-          {{!-- repeat for each contact
+          {{#each model}}
             <li>
               <a href="#">
-                {{!-- the name of the contact }}
+                {{name}}
               </a>
             </li>
-          }}
+          {{/each}}
         </ul>
-      --}}
-      {{!-- if no search results exist
+      {{else}}
         <p>
-          A contact named <strong>{{!-- the search criteria }}</strong> is not found.
+          A contact named <strong>criteria</strong> is not found.
         </p>
-      --}}
+      {{/if}}
       <div class="clearfix"></div>
     </div>
     <hr/>
 
     <div id="contactsList" class="listContainer">
-      {{!-- repeat for each list of contacts
+      {{#if model}}
         <dl>
-          <dt>{{!-- the name of the list }}</dt>
-          {{!-- repeat for each contact in the list
+          <dt>Initial</dt>
+          {{#each model}}
             <dd>
-              <a href="#" class="cnt">
-                {{!-- the name of the contact }}
-              </a>
+              {{#linkTo "contact" this classNames="cnt"}}{{name}}{{/linkTo}}
             </dd>
-          }}
+          {{/each}}
         </dl>
-      --}}
+      {{/if}}
     </div>
+    
     <div id="rightViewContainer">
-      {{!-- put the add/edit/view template here --}}
+    	{{outlet}}
     </div>
+
   </div>
 </script>
 
-<script type="text/x-handlebars" data-template-name="add">
+<script type="text/x-handlebars" data-template-name="_add">
   <form name="myForm" class="formdesign">
     <div>
       <input type="text" placeholder="Name">
@@ -104,7 +105,7 @@
     <h2>
       {{!-- the name of the contact --}}
     </h2>
-    <img src="/img/profile_image.png" alt="">
+    <img src="./img/profile_image.png" alt="">
   </div>
   <div class="col2">
     <p class="email">
@@ -153,7 +154,7 @@
     <button class="btn btn-left" {{!-- disabled when any field is invalid --}}>
       Done
     </button>
-    <button class="btn btn-danger">
+    <button class="btn btn-danger" {{action remove}}>
       Delete
     </button>
     </div>

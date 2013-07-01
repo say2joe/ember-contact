@@ -126,7 +126,7 @@ header {
 
 #smartSearch {
     height: 120px;
-    background: url("/img/lens.png") no-repeat left center;
+    background: url("./../img/lens.png") no-repeat left center;
     padding-left: 80px;
     border-top: 2px solid #828e8a;
     border-bottom: 1px solid #46514f;
@@ -141,7 +141,7 @@ header {
     letter-spacing: -2px;
     color: #cdd9d7;
     font-weight: bold;
-    width: 450px;
+    width: 320px;
     display: block;
     float: left;
 }
@@ -299,7 +299,7 @@ dd {
     margin: 0;
     padding: 0 0 5px 15px;
     white-space: nowrap;
-	  background-image: url("/img/arrows.png");
+	  background-image: url("./../img/arrows.png");
      background: none;
      background-position: center center;
     -moz-transition: all .3s ease 0s;
@@ -307,7 +307,7 @@ dd {
 }
 
 dd:hover {
-    background: url("/img/arrows.png") #46514f center right no-repeat;
+    background: url("./../img/arrows.png") #46514f center right no-repeat;
 }
 
 dd + dd {
@@ -457,11 +457,11 @@ a.cnt:hover {
 }
 a.back {
     text-indent: -9999px;
-    background: url("/img/back.png") no-repeat center center #515c5a;
+    background: url("./../img/back.png") no-repeat center center #515c5a;
     padding: 10px 5px;
 }
 a.back:hover {
-    background-image: url("/img/back.png");
+    background-image: url("./../img/back.png");
     background-repeat: no-repeat;
     background-position: center center;
 }
@@ -499,10 +499,10 @@ p {
     padding-bottom: 5px;
 }
 p.email {
-    background-image: url("/img/email.png");
+    background-image: url("./../img/email.png");
 }
 p.phone {
-    background-image: url("/img/phone.png");
+    background-image: url("./../img/phone.png");
 }
 .col1, .col2 {
     width: 270px;
