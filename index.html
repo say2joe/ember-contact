@@ -62,7 +62,11 @@
     </div>
     
     <div id="rightViewContainer">
-    	{{outlet}}
+      {{#if isDefaultIndex}}
+        {{partial "add"}}
+      {{else}}
+        {{outlet}}
+      {{/if}}
     </div>
 
   </div>
