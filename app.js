@@ -42,13 +42,7 @@ App.EditContactRoute = Ember.Route.extend({
   }
 });
 
-App.sortContacts = function() {
-  App.Contacts.sort(function(a, b) {
-    return a.name.substr(0, 1).toUpperCase() > b.name.substr(0, 1).toUpperCase();
-  });
-};
-
-App.ContactController = Ember.ObjectController.extend({
+App.EditContactController = Ember.ObjectController.extend({
   isAdding: true,
   isEditing: false,
   isInvalid: false,
@@ -76,6 +70,18 @@ App.ContactController = Ember.ObjectController.extend({
   }
 });
 
+App.sortContacts = function() {
+  function getInitial(str) {
+    return str.substr(0,1).toUpperCase();
+  }
+  App.Contacts.sort(function(a, b) {
+    a = getInitial(a.name);
+    b = getInitial(b.name);
+    return a > b;
+  });
+};
+
+
 /** Sample (seed) Data: **/
 App.Contacts = [{
   id: 1,
@@ -90,6 +96,7 @@ App.Contacts = [{
   phone: "123-123-1234",
   email: "help@emberjs.com"
 }];
+
 
 /** Miscellany: (To be removed in production) **/
 Handlebars.registerHelper("debug", function(optionalValue) {
