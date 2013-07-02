@@ -62,7 +62,7 @@
     </div>
     
     <div id="rightViewContainer">
-    	{{outlet}}
+    	{{outlet add}}
     </div>
 
   </div>
@@ -124,7 +124,7 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="edit">
-  <form name="myForm" class="formdesign">
+  <form name="myForm" class="formdesign" {{action done on="submit"}}>
     <div>
       {{input type="text" placeholder="Name" value=name}}
       {{!-- displayed when the value is invalid
@@ -149,10 +149,10 @@
         </span>
       --}}
     </div>
-    <button class="btn btn-left" {{bindAttr disabled="isInvalid"}} {{action 'save'}}>
+    <button class="btn btn-left" type="submit" {{bindAttr disabled="isInvalid"}}>
       Done
     </button>
-    <button class="btn btn-danger" {{action 'remove'}}>
+    <button class="btn btn-danger" {{action remove}}>
       Delete
     </button>
     </div>

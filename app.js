@@ -21,6 +21,15 @@ App.ApplicationRoute = Ember.Route.extend({
     this.render({
       outlet: 'add'
     });
+  },
+  events: {
+    addContact: function() {
+      console.log("Adding contact ...");
+      var contacts = this.modelFor('application');
+      this.transitionTo('viewContact',
+        contacts.pushObject({ id: contacts.length })
+      );
+    }
   }
 });
 
@@ -39,35 +48,26 @@ App.EditContactRoute = Ember.Route.extend({
   },
   renderTemplate: function() {
     this.render('edit');
+  },
+  events: {
+    remove: function() {
+      console.log("Deleting contact ...");
+      this.modelFor('application').removeObject(
+        this.modelFor('editContact')
+      );
+      this.transitionTo('application');
+    },
+    done: function() {
+      console.log("Saving contact ...");
+      this.transitionTo('viewContact',
+        this.modelFor('editContact')
+      );
+    }
   }
 });
 
 App.EditContactController = Ember.ObjectController.extend({
-  isAdding: true,
-  isEditing: false,
-  isInvalid: false,
-
-  add: function() {
-    this.set('isAdding', true);
-  },
-
-  save: function() {
-    this.set('isAdding', false);
-    this.set('list', 'j'.toUpperCase());
-  },
-
-  edit: function() {
-    this.set('isEditing', true);
-  },
-
-  remove: function() {
-    //
-  },
-
-  doneEditing: function() {
-    this.set('isEditing', false);
-    this.set('list', 'j'.toUpperCase());
-  }
+  isEditing: false, isInvalid: false
 });
 
 App.sortContacts = function() {
