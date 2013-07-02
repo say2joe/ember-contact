@@ -4,8 +4,11 @@ App.Router.map(function() {
   this.resource('application', {
     path: '*:'
   });
-  this.resource('contact', {
+  this.resource('viewContact', {
     path: '/contacts/:contact_id'
+  });
+  this.resource('editContact', {
+    path: '/contacts/:contact_id/edit'
   });
 });
 
@@ -21,12 +24,21 @@ App.ApplicationRoute = Ember.Route.extend({
   }
 });
 
-App.ContactRoute = Ember.Route.extend({
+App.ViewContactRoute = Ember.Route.extend({
   model: function(params) {
     return App.Contacts[params.contact_id];
   },
   renderTemplate: function() {
     this.render('view');
+  }
+});
+
+App.EditContactRoute = Ember.Route.extend({
+  model: function(params) {
+    return App.Contacts[params.contact_id];
+  },
+  renderTemplate: function() {
+    this.render('edit');
   }
 });
 
@@ -39,6 +51,7 @@ App.sortContacts = function() {
 App.ContactController = Ember.ObjectController.extend({
   isAdding: true,
   isEditing: false,
+  isInvalid: false,
 
   add: function() {
     this.set('isAdding', true);

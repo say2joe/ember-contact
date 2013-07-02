@@ -54,7 +54,7 @@
           <dt>Initial</dt>
           {{#each model}}
             <dd>
-              {{#linkTo "contact" this classNames="cnt"}}{{name}}{{/linkTo}}
+              {{#linkTo "viewContact" this class="cnt"}}{{name}}{{/linkTo}}
             </dd>
           {{/each}}
         </dl>
@@ -103,16 +103,16 @@
 <script type="text/x-handlebars" data-template-name="view">
   <div class="col1">
     <h2>
-      {{!-- the name of the contact --}}
+      {{name}}
     </h2>
-    <img src="./img/profile_image.png" alt="">
+    <img src="./img/profile_image.png" alt="Photo of {{name}}">
   </div>
   <div class="col2">
     <p class="email">
-      {{!-- the email of the contact --}}
+      {{email}}
     </p>
     <p class="phone">
-      {{!-- the phone of the contact --}}
+      {{phone}}
     </p>
   </div>
   <hr/>
@@ -120,15 +120,13 @@
   <a class="btn btn-left back">
     Go Back
   </a>
-  <a class="btn">
-    Edit
-  </a>
+  {{#linkTo "editContact" this class="btn"}} Edit {{/linkTo}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="edit">
   <form name="myForm" class="formdesign">
     <div>
-      <input type="text" placeholder="Name">
+      {{input type="text" placeholder="Name" value=name}}
       {{!-- displayed when the value is invalid
         <span>
           What good it will do without entering your contact`s name?
@@ -136,7 +134,7 @@
       --}}
     </div>
     <div>
-      <input type="text" placeholder="Phone">
+      {{input type="text" placeholder="Phone" value=phone}}
       {{!-- displayed when the value is invalid
         <span>
           It is supposed to be a number. Right?
@@ -144,17 +142,17 @@
       --}}
     </div>
     <div>
-      <input type="text" placeholder="Email">
+      {{input type="text" placeholder="Email" value=email}}
       {{!-- displayed when the value is invalid
         <span>
           From when they started to accept invalid emails?
         </span>
       --}}
     </div>
-    <button class="btn btn-left" {{!-- disabled when any field is invalid --}}>
+    <button class="btn btn-left" {{bindAttr disabled="isInvalid"}} {{action 'save'}}>
       Done
     </button>
-    <button class="btn btn-danger" {{action remove}}>
+    <button class="btn btn-danger" {{action 'remove'}}>
       Delete
     </button>
     </div>
