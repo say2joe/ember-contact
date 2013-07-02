@@ -82,7 +82,7 @@ App.sortContacts = function() {
     return a > b;
   });
   App.ContactLists = {};
-  for (var i = 0, contact, initial; i < l; i++) {
+  for (var i = 0, contact, list; i < l; i++) {
     contact = contacts[i];
     list = getInitial(contact.name);
     if (App.ContactLists[list]) App.ContactLists[list].push(contact.id);
