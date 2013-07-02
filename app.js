@@ -71,31 +71,45 @@ App.EditContactController = Ember.ObjectController.extend({
 });
 
 App.sortContacts = function() {
-  function getInitial(str) {
-    return str.substr(0,1).toUpperCase();
-  }
-  App.Contacts.sort(function(a, b) {
+  var l = App.Contacts.length,
+      contacts = App.Contacts,
+      getInitial = function(str) {
+        return str.substr(0,1).toUpperCase();
+      };
+  contacts.sort(function(a, b) {
     a = getInitial(a.name);
     b = getInitial(b.name);
     return a > b;
   });
+  App.ContactLists = {};
+  for (var i = 0, contact, initial; i < l; i++) {
+    contact = contacts[i];
+    list = getInitial(contact.name);
+    if (App.ContactLists[list]) App.ContactLists[list].push(contact.id);
+    else App.ContactLists[list] = [contact.id];
+  }
 };
 
 
 /** Sample (seed) Data: **/
-App.Contacts = [{
-  id: 1,
-  list: 'J',
-  name: "Joe Johnson",
-  phone: "657-464-HTML",
-  email: "say2joe@gmail.com"
-}, {
-  id: 2,
-  list: 'E',
-  name: "Ember Doe",
-  phone: "123-123-1234",
-  email: "help@emberjs.com"
-}];
+App.Contacts = [
+  {
+    id: 1,
+    name: "Joe Johnson",
+    phone: "657-464-HTML",
+    email: "say2joe@gmail.com"
+  }, {
+    id: 2,
+    name: "Ember Doe",
+    phone: "123-123-1234",
+    email: "help@emberjs.com"
+  }, {
+    id: 3,
+    name: "Bobby the Barbarian",
+    phone: "310-123-4567",
+    email: "protector@somewhere.com"
+  }
+];
 
 
 /** Miscellany: (To be removed in production) **/
