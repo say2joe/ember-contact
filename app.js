@@ -16,14 +16,13 @@ App.ApplicationRoute = Ember.Route.extend({
   model: function() {
     App.sortContacts();
     return App.Contacts;
-  },
+  },/*
   renderTemplate: function() {
-    this.render({
-      outlet: 'add'
-    });
-  },
+    this.render('application');
+    this.render('add');
+  },*/
   events: {
-    addContact: function() {
+    add: function() {
       console.log("Adding contact ...");
       var contacts = this.modelFor('application');
       this.transitionTo('viewContact',

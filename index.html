@@ -62,14 +62,14 @@
     </div>
     
     <div id="rightViewContainer">
-    	{{outlet add}}
+    	{{outlet}}
     </div>
 
   </div>
 </script>
 
-<script type="text/x-handlebars" data-template-name="add">
-  <form name="myForm" class="formdesign">
+<script type="text/x-handlebars" data-template-name="add" id="add">
+  <form name="myForm" class="formdesign" {{action add on="submit"}}>
     <div>
       <input type="text" placeholder="Name">
       {{!-- displayed when the value is invalid
@@ -94,7 +94,7 @@
         </span>
       --}}
     </div>
-    <button {{!-- disable this button when any field is invalid --}}>
+    <button {{bindAttr disabled="isInvalid"}}>
       Save
     </button>
   </form>
